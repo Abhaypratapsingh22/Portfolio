@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Abhay Pratap Singh — Computer Science Engineer & Data Analyst. Portfolio showcasing projects in data analytics, machine learning, and full-stack development.">
+    <title>Abhay Pratap Singh — Portfolio</title>
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Devicon for skill logos in marquee -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#certificates" class="nav-link">Certificates</a></li>
+                <li><a href="#activities" class="nav-link">Activities</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <!-- Theme Toggle Switch -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <div class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <canvas id="hero-particles"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <p class="hero-greeting">👋 Hello, I'm</p>
+                <h1 class="hero-title">
+                    <span class="highlight">Abhay Pratap Singh</span>
+                </h1>
+                <h2 class="hero-subtitle">
+                    <span id="typed-subtitle"></span><span class="typed-cursor">|</span>
+                </h2>
+                <p class="hero-description">
+                    Passionate about data analytics, machine learning, and creating impactful solutions through
+                    technology.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary" id="hero-cta-primary">
+                        <i class="fas fa-paper-plane"></i> Get In Touch
+                    </a>
+                    <a href="#projects" class="btn btn-secondary" id="hero-cta-secondary">
+                        <i class="fas fa-folder-open"></i> View Projects
+                    </a>
+                </div>
+                <div class="hero-social">
+                    <a href="https://www.linkedin.com/in/abhaysingh88/" target="_blank" class="social-link"
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/Abhaypratapsingh22" target="_blank" class="social-link"
+                        aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12sTj6jRuBkJgg_otbsuJN3cLUAU38X7I/view?usp=drive_link"
+                        target="_blank" class="social-link resume-link" aria-label="View Resume">
+                        <i class="fas fa-file-pdf"></i>
+                        <span class="resume-text">View Resume</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-circle">
+                    <div class="profile-img">
+                        <img src="assets/images/Abhay LPU photo.png" alt="Abhay Pratap Singh" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section — Redesigned layout matching reference -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-item">About Me</h2>
+            <div class="about-layout">
+                <!-- Left Column — Quick Facts + Hobbies -->
+                <div class="about-sidebar reveal-item">
+                    <div class="about-card">
+                        <h3 class="about-card-title">Quick Facts</h3>
+                        <div class="quick-fact">
+                            <div class="fact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <span class="fact-label">Location</span>
+                                <span class="fact-value">Phagwara, Punjab</span>
+                            </div>
+                        </div>
+                        <div class="quick-fact">
+                            <div class="fact-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div>
+                                <span class="fact-label">Education</span>
+                                <span class="fact-value">Pursuing B.Tech in CSE</span>
+                            </div>
+                        </div>
+                        <div class="quick-fact">
+                            <div class="fact-icon"><i class="fas fa-briefcase"></i></div>
+                            <div>
+                                <span class="fact-label">Experience</span>
+                                <span class="fact-value">5+ Projects</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-card">
+                        <h3 class="about-card-title">When I'm Not Coding</h3>
+                        <div class="hobby-item">
+                            <div class="hobby-icon"><i class="fas fa-globe"></i></div>
+                            <div>
+                                <span class="hobby-name">Exploring the Web</span>
+                                <span class="hobby-desc">Staying updated with tech trends, AI advancements, and
+                                    innovations</span>
+                            </div>
+                        </div>
+                        <div class="hobby-item">
+                            <div class="hobby-icon"><i class="fas fa-book-open"></i></div>
+                            <div>
+                                <span class="hobby-name">Reading</span>
+                                <span class="hobby-desc">Learning about technology, productivity, and personal
+                                    growth</span>
+                            </div>
+                        </div>
+                        <div class="hobby-item">
+                            <div class="hobby-icon"><i class="fas fa-music"></i></div>
+                            <div>
+                                <span class="hobby-name">Music</span>
+                                <span class="hobby-desc">Relaxing and boosting creativity</span>
+                            </div>
+                        </div>
+                        <div class="hobby-item">
+                            <div class="hobby-icon"><i class="fas fa-chess"></i></div>
+                            <div>
+                                <span class="hobby-name">Playing Chess</span>
+                                <span class="hobby-desc">Enhancing strategic thinking and problem-solving skills</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column — Journey + Approach -->
+                <div class="about-main reveal-item">
+                    <div class="about-card">
+                        <h3 class="about-card-title highlight">My Journey</h3>
+                        <p>
+                            Hello! I'm <span class="highlight">Abhay Pratap Singh</span>, a passionate developer and
+                            data enthusiast driven by curiosity and problem-solving.
+                        </p>
+                        <p>
+                            My journey in tech began with exploration and has evolved into a strong focus on data
+                            analytics, machine learning, and real-world problem solving. Through hands-on projects, I've
+                            built expertise in creating interactive dashboards, extracting insights from data, and
+                            developing intelligent solutions using tools like Python, SQL, Power BI, and modern web
+                            technologies.
+                        </p>
+                        <p>
+                            Beyond technical skills, I am deeply interested in solving real-world problems through
+                            technology and continuously improving my ability to build efficient, scalable, and
+                            user-friendly solutions.
+                        </p>
+                        <p>
+                            I am constantly learning, building, and pushing my boundaries to stay aligned with emerging
+                            technologies, especially in the field of Generative AI and data-driven innovation.
+                        </p>
+                    </div>
+                    <div class="about-card">
+                        <h3 class="about-card-title highlight">My Approach</h3>
+                        <p>
+                            I believe technology should not only be functional but also impactful and user-centric. I
+                            focus on building solutions that are both technically strong and intuitively designed,
+                            ensuring they solve real-world problems efficiently. Collaboration, experimentation, and
+                            consistency are the core principles that guide my development process.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title reveal-item">Skills</h2>
+            <div class="skills-grid">
+
+                <!-- Languages -->
+                <div class="flip-card reveal-item">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="skill-header">
+                                <div class="skill-icon-wrapper"><i class="fas fa-code"></i></div>
+                                <h3>Languages</h3>
+                            </div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">C</span>
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">HTML</span>
+                                <span class="skill-tag">CSS</span>
+                            </div>
+                            <p class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to see more</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Proficiency</h3>
+                            <div class="back-proficiency">
+                                <div class="back-prof-item">
+                                    <span>Java</span>
+                                    <div class="prof-bar">
+                                        <div class="prof-fill" style="--fill: 85%"></div>
+                                    </div>
+                                    <span class="prof-pct">85%</span>
+                                </div>
+                                <div class="back-prof-item">
+                                    <span>Python</span>
+                                    <div class="prof-bar">
+                                        <div class="prof-fill" style="--fill: 90%"></div>
+                                    </div>
+                                    <span class="prof-pct">90%</span>
+                                </div>
+                                <div class="back-prof-item">
+                                    <span>JavaScript</span>
+                                    <div class="prof-bar">
+                                        <div class="prof-fill" style="--fill: 50%"></div>
+                                    </div>
+                                    <span class="prof-pct">50%</span>
+                                </div>
+                                <div class="back-prof-item">
+                                    <span>C / C++</span>
+                                    <div class="prof-bar">
+                                        <div class="prof-fill" style="--fill: 87%"></div>
+                                    </div>
+                                    <span class="prof-pct">87%</span>
+                                </div>
+                                <div class="back-prof-item">
+                                    <span>HTML</span>
+                                    <div class="prof-bar">
+                                        <div class="prof-fill" style="--fill: 85%"></div>
+                                    </div>
+                                    <span class="prof-pct">85%</span>
+                                </div>
+                                <div class="back-prof-item">
+                                    <span>CSS</span>
+                                    <div class="prof-bar">
+                                        <div class="prof-fill" style="--fill: 84%"></div>
+                                    </div>
+                                    <span class="prof-pct">84%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Libraries -->
+                <div class="flip-card reveal-item">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="skill-header">
+                                <div class="skill-icon-wrapper"><i class="fas fa-book"></i></div>
+                                <h3>Libraries</h3>
+                            </div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">NumPy</span>
+                                <span class="skill-tag">Pandas</span>
+                                <span class="skill-tag">Matplotlib</span>
+                                <span class="skill-tag">Seaborn</span>
+                                <span class="skill-tag">Scikit-learn</span>
+                            </div>
+                            <p class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to see more</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Use Cases</h3>
+                            <ul class="back-list">
+                                <li><i class="fas fa-check-circle"></i> Data wrangling & cleaning</li>
+                                <li><i class="fas fa-check-circle"></i> Exploratory data analysis</li>
+                                <li><i class="fas fa-check-circle"></i> Statistical visualizations</li>
+                                <li><i class="fas fa-check-circle"></i> ML model training & evaluation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Platforms -->
+                <div class="flip-card reveal-item">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="skill-header">
+                                <div class="skill-icon-wrapper"><i class="fas fa-tools"></i></div>
+                                <h3>Tools & Platforms</h3>
+                            </div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Power BI</span>
+                                <span class="skill-tag">MySQL</span>
+                                <span class="skill-tag">Excel</span>
+                                <span class="skill-tag">VS Code</span>
+                                <span class="skill-tag">Jupyter Notebook</span>
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">GitHub</span>
+                                <span class="skill-tag">Linux</span>
+                            </div>
+                            <p class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to see more</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Experience</h3>
+                            <ul class="back-list">
+                                <li><i class="fas fa-check-circle"></i> Interactive BI dashboards</li>
+                                <li><i class="fas fa-check-circle"></i> Complex SQL queries & joins</li>
+                                <li><i class="fas fa-check-circle"></i> Advanced Excel analytics</li>
+                                <li><i class="fas fa-check-circle"></i> Data pipeline design</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="flip-card reveal-item">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="skill-header">
+                                <div class="skill-icon-wrapper"><i class="fas fa-users"></i></div>
+                                <h3>Soft Skills</h3>
+                            </div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Problem-Solving</span>
+                                <span class="skill-tag">Teamwork</span>
+                                <span class="skill-tag">Presentation</span>
+                                <span class="skill-tag">Adaptability</span>
+                            </div>
+                            <p class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to see more</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Highlights</h3>
+                            <ul class="back-list">
+                                <li><i class="fas fa-check-circle"></i> SIH hackathon team experience</li>
+                                <li><i class="fas fa-check-circle"></i> Technical presentation skills</li>
+                                <li><i class="fas fa-check-circle"></i> Quick learner & self-motivated</li>
+                                <li><i class="fas fa-check-circle"></i> Collaborative project work</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Marquee — auto-sliding skill icons -->
+            <div class="skills-marquee reveal-item">
+                <div class="marquee-track">
+                    <!-- First set -->
+                    <div class="marquee-item"><i class="devicon-java-plain"></i><span>Java</span></div>
+                    <div class="marquee-item"><i class="devicon-python-plain"></i><span>Python</span></div>
+                    <div class="marquee-item"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
+                    <div class="marquee-item"><i class="devicon-c-plain"></i><span>C</span></div>
+                    <div class="marquee-item"><i class="devicon-cplusplus-plain"></i><span>C++</span></div>
+                    <div class="marquee-item"><i class="devicon-html5-plain"></i><span>HTML5</span></div>
+                    <div class="marquee-item"><i class="devicon-css3-plain"></i><span>CSS3</span></div>
+                    <div class="marquee-item"><i class="devicon-mysql-plain"></i><span>MySQL</span></div>
+                    <div class="marquee-item"><i class="devicon-numpy-original"></i><span>NumPy</span></div>
+                    <div class="marquee-item"><i class="devicon-pandas-original"></i><span>Pandas</span></div>
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="marquee-item"><i class="devicon-java-plain"></i><span>Java</span></div>
+                    <div class="marquee-item"><i class="devicon-python-plain"></i><span>Python</span></div>
+                    <div class="marquee-item"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
+                    <div class="marquee-item"><i class="devicon-c-plain"></i><span>C</span></div>
+                    <div class="marquee-item"><i class="devicon-cplusplus-plain"></i><span>C++</span></div>
+                    <div class="marquee-item"><i class="devicon-html5-plain"></i><span>HTML5</span></div>
+                    <div class="marquee-item"><i class="devicon-css3-plain"></i><span>CSS3</span></div>
+                    <div class="marquee-item"><i class="devicon-mysql-plain"></i><span>MySQL</span></div>
+                    <div class="marquee-item"><i class="devicon-numpy-original"></i><span>NumPy</span></div>
+                    <div class="marquee-item"><i class="devicon-pandas-original"></i><span>Pandas</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-item">Projects</h2>
+
+            <!-- Filter Chips -->
+            <div class="filter-chips reveal-item" id="filter-chips">
+                <button class="filter-chip active" data-filter="all">All</button>
+                <button class="filter-chip" data-filter="powerbi">Power BI</button>
+                <button class="filter-chip" data-filter="python">Python</button>
+                <button class="filter-chip" data-filter="ml">ML</button>
+                <button class="filter-chip" data-filter="excel">Excel</button>
+            </div>
+
+            <div class="projects-grid" id="projects-grid">
+                <div class="project-card reveal-item" data-category="powerbi">
+                    <div class="project-image">
+                        <img src="assets/images/project-cyber-risk.png" alt="Cyber Risk Dashboard">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Cyber Risk & Financial Impact Analysis Dashboard</h3>
+                        <span class="project-date">Nov 2025 – Dec 2025</span>
+                        <div class="project-tech">
+                            <span class="tech-tag">Power BI</span>
+                        </div>
+                        <p class="project-description">
+                            Developed an interactive dashboard to visualize affected users, identify threats (Phishing,
+                            Malware),
+                            and pinpoint vulnerable sectors in Education.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhaypratapsingh22/Cyber-Risk-Financial-Impact-Analysis-Dashboard"
+                                target="_blank" class="project-link">
+                                <i class="fab fa-github"></i> GitHub <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal-item" data-category="python">
+                    <div class="project-image">
+                        <img src="assets/images/project-game-sales.png" alt="Video Game Sales Analysis">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Video Game Sales Analysis</h3>
+                        <span class="project-date">Jun 2025 – Jul 2025</span>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">ML</span>
+                        </div>
+                        <p class="project-description">
+                            Analyzed sales data to identify top genres and built machine learning models for sales
+                            prediction
+                            and trend analysis.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhaypratapsingh22/Video-Game-Sales-Analysis" target="_blank"
+                                class="project-link">
+                                <i class="fab fa-github"></i> GitHub <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal-item" data-category="excel">
+                    <div class="project-image">
+                        <img src="assets/images/project-crime-analysis.png" alt="Crime Incident Analysis">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Crime Incident Analysis Dashboard</h3>
+                        <span class="project-date">Sep 2024 – Dec 2024</span>
+                        <div class="project-tech">
+                            <span class="tech-tag">MS Excel</span>
+                        </div>
+                        <p class="project-description">
+                            Developed a data analytics framework to process incident records, classify high-frequency
+                            offenses,
+                            and identify critical hotspots.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhaypratapsingh22/Crime-Incident-Analysis" target="_blank"
+                                class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Project <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal-item" data-category="ml">
+                    <div class="project-image">
+                        <img src="assets/images/project-wind-power.png" alt="Wind Power Generation Forecasting">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">🌬️ Wind Power Generation Forecasting</h3>
+                        <span class="project-date">Jan 2026 – Feb 2026</span>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Scikit-learn</span>
+                            <span class="tech-tag">XGBoost</span>
+                            <span class="tech-tag">Data Visualization</span>
+                        </div>
+                        <p class="project-description">
+                            Developed a predictive model for wind energy generation using weather features. Achieved R²
+                            = 0.64 with tuned XGBoost by leveraging feature insights like wind speed and gusts, enabling
+                            better energy forecasting and planning.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhaypratapsingh22/Wind_Power_Generation_Forecasting"
+                                target="_blank" class="project-link">
+                                <i class="fab fa-github"></i> GitHub <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title reveal-item">Education</h2>
+            <div class="education-timeline">
+                <div class="education-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="education-content">
+                        <div class="education-header">
+                            <h3>Lovely Professional University</h3>
+                            <span class="education-date">Aug 2023 – Present</span>
+                        </div>
+                        <p class="education-degree">B.Tech — Computer Science & Engineering</p>
+                        <p class="education-location"><i class="fas fa-map-marker-alt"></i> Punjab, India</p>
+                        <div class="education-grade">
+                            <span class="grade-label">CGPA</span>
+                            <span class="grade-value">8.03</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="education-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="education-content">
+                        <div class="education-header">
+                            <h3>Little Scholar Academy</h3>
+                            <span class="education-date">Apr 2021 – Mar 2022</span>
+                        </div>
+                        <p class="education-degree">Intermediate</p>
+                        <p class="education-location"><i class="fas fa-map-marker-alt"></i> Gorakhpur, Uttar Pradesh</p>
+                        <div class="education-grade">
+                            <span class="grade-label">Percentage</span>
+                            <span class="grade-value">82%</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-item">Certificates & Training</h2>
+            <div class="certificates-grid">
+
+                <div class="certificate-card reveal-item">
+                    <div class="certificate-image">
+                        <img src="assets/images/certificates/data analyst.png" alt="Data Analytics Certificate">
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Mastering Data Analytics: Raw Data To Decision</h3>
+                        <p class="certificate-issuer">Fifth Force</p>
+                        <p class="certificate-date">Jun 2025 – Jul 2025</p>
+                        <p class="certificate-description">SQL querying, EDA with Matplotlib and Seaborn, Inferential
+                            Statistics</p>
+                        <a href="https://drive.google.com/file/d/1J8Yunkmqn6tqnXT8hRwRdBGRkAQGjLWS/view?usp=drive_link"
+                            target="_blank" class="certificate-link">
+                            <i class="fas fa-external-link-alt"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <div class="certificate-card reveal-item">
+                    <div class="certificate-image">
+                        <img src="assets/images/certificates/java.png" alt="Java Programming Certificate">
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Java Programming</h3>
+                        <p class="certificate-issuer">IamNeo</p>
+                        <p class="certificate-date">Jan 2025 – Apr 2025</p>
+                        <a href="https://drive.google.com/file/d/1psfRkwVrp1YRfiLAb55rEEoqUubsZzBa/view?usp=drive_link"
+                            target="_blank" class="certificate-link">
+                            <i class="fas fa-external-link-alt"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <div class="certificate-card reveal-item">
+                    <div class="certificate-image">
+                        <img src="assets/images/certificates/dsa.png" alt="DSA Certificate">
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Data Structures and Algorithm</h3>
+                        <p class="certificate-issuer">IamNeo</p>
+                        <p class="certificate-date">Aug 2024 – Dec 2024</p>
+                        <a href="https://drive.google.com/file/d/1raO-nZbd3BnCrtg4qLOq1u_NvZ106vnh/view?usp=drive_link"
+                            target="_blank" class="certificate-link">
+                            <i class="fas fa-external-link-alt"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <div class="certificate-card reveal-item">
+                    <div class="certificate-image">
+                        <img src="assets/images/certificates/os.png" alt="OS Fundamentals Certificate">
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Operating System Fundamentals</h3>
+                        <p class="certificate-issuer">NPTEL</p>
+                        <p class="certificate-date">Jul 2024 – Oct 2024</p>
+                        <a href="https://drive.google.com/file/d/11FsbvN5BhKSJ3Ymmiy5Hxxf7zVe_K-kR/view?usp=drive_link"
+                            target="_blank" class="certificate-link">
+                            <i class="fas fa-external-link-alt"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <div class="certificate-card reveal-item">
+                    <div class="certificate-image">
+                        <img src="assets/images/certificates/maths.png" alt="Discrete Mathematics Certificate">
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Discrete Mathematics</h3>
+                        <p class="certificate-issuer">NPTEL</p>
+                        <p class="certificate-date">Jan 2024 – Apr 2024</p>
+                        <a href="https://drive.google.com/file/d/1s3ZuQTz8LbQ_cudwiLFclb1iJuY1d2lL/view?usp=drive_link"
+                            target="_blank" class="certificate-link">
+                            <i class="fas fa-external-link-alt"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <div class="certificate-card reveal-item">
+                    <div class="certificate-image">
+                        <img src="assets/images/certificates/C.png" alt="C Programming Certificate">
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Introduction to Programming in C</h3>
+                        <p class="certificate-issuer">NPTEL</p>
+                        <p class="certificate-date">Jan 2024 – Mar 2024</p>
+                        <a href="https://drive.google.com/file/d/1PGUJQYV0Hz3VPZCfnQo6g8m3CR_cJij7/view?usp=drive_link"
+                            target="_blank" class="certificate-link">
+                            <i class="fas fa-external-link-alt"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extra Co-Curricular Activities Section -->
+    <section id="activities" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title reveal-item">Extra Co-Curricular Activities</h2>
+            <div class="activities-timeline">
+                <div class="activity-card reveal-item">
+                    <div class="activity-icon-box">
+                        <span class="activity-emoji">🤝</span>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <h3>Volunteer – Community Development NGO</h3>
+                        </div>
+                        <p class="activity-role">Community Service & Skill Development</p>
+                        <div class="activity-detail-hover">
+                            <p>Contributed to skill development initiatives, assisting in training programs and
+                                supporting operational activities aimed at empowering individuals.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-card reveal-item">
+                    <div class="activity-icon-box">
+                        <span class="activity-emoji">🧩</span>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <h3>Event Organizer – Treasure Hunt (Tatva Club)</h3>
+                        </div>
+                        <p class="activity-role">Event Planning & Coordination</p>
+                        <div class="activity-detail-hover">
+                            <p>Volunteered in organizing and managing a campus-level treasure hunt event, ensuring
+                                smooth coordination, participant engagement, and successful execution.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-card reveal-item">
+                    <div class="activity-icon-box">
+                        <span class="activity-emoji">🎉</span>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <h3>Event Management – Fresher's Party 2024 (Tatva Club)</h3>
+                        </div>
+                        <p class="activity-role">Event Management & Execution</p>
+                        <div class="activity-detail-hover">
+                            <p>Played a key role in organizing and executing the fresher's event, contributing to
+                                planning, coordination, and seamless event flow.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-card reveal-item">
+                    <div class="activity-icon-box">
+                        <span class="activity-emoji">🏆</span>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <h3>Smart India Hackathon Nomination (Sep 2025)</h3>
+                        </div>
+                        <p class="activity-role">National-Level Hackathon</p>
+                        <div class="activity-detail-hover">
+                            <p>Nominated among the Top 50 teams from the university, showcasing problem-solving skills,
+                                innovation, and teamwork in a national-level competition.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-item">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info reveal-item">
+                    <h3>Let's Connect!</h3>
+                    <p>I'm always interested in hearing about new opportunities and exciting projects.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:abhaypratap8808singh@gmail.com">abhaypratap8808singh@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+918009403511">+91 8009403511</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://www.linkedin.com/in/abhaysingh88/"
+                                target="_blank">https://www.linkedin.com/in/abhaysingh88/</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <a href="https://github.com/Abhaypratapsingh22/"
+                                target="_blank">https://github.com/Abhaypratapsingh22/</a>
+                        </div>
+                    </div>
+                    <div class="contact-socials">
+                        <a href="https://www.linkedin.com/in/abhaysingh88/" target="_blank" class="social-icon-link"
+                            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/Abhaypratapsingh22/" target="_blank" class="social-icon-link"
+                            aria-label="GitHub"><i class="fab fa-github"></i></a>
+
+                    </div>
+                </div>
+                <div class="contact-form reveal-item">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="5" placeholder="Your Message"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="contact-submit">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Abhay Pratap Singh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
