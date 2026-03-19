@@ -45,7 +45,10 @@
     }
 
     // ============================================================
-    //  PARTICLE CANVAS — lightweight dot-and-line system
+    //  HERO CANVAS — Cinematic AI Background
+    //  Layer 1: Plasma sine waves
+    //  Layer 2: Neural brain network with signal pulses
+    //  Layer 3: Matrix binary rain
     // ============================================================
     let particleAnimId;
     let reinitParticles;
@@ -56,104 +59,308 @@
 
         const ctx = canvas.getContext('2d');
         let W, H;
-        let particles = [];
-        let mouse = { x: null, y: null, radius: 120 };
+        let mouse = { x: -9999, y: -9999 };
 
-        function resize() {
-            W = canvas.width = canvas.parentElement.offsetWidth;
-            H = canvas.height = canvas.parentElement.offsetHeight;
+        // ---- Color helpers ----
+        function getAccent() {
+            return document.body.classList.contains('dark-mode')
+                ? { r: 6, g: 182, b: 212 }      // cyan
+                : { r: 108, g: 99, b: 255 };    // purple
+        }
+        function ac(a) {
+            const c = getAccent();
+            return `rgba(${c.r},${c.g},${c.b},${a})`;
+        }
+        function acHex() {
+            const c = getAccent();
+            return `rgb(${c.r},${c.g},${c.b})`;
         }
 
-        function createParticles() {
-            const count = Math.min(Math.floor((W * H) / 12000), 100);
-            particles = [];
+        // ---- Resize ----
+        function resize() {
+            W = canvas.width  = canvas.offsetWidth;
+            H = canvas.height = canvas.offsetHeight;
+            init();
+        }
+
+        // ========================================================
+        // LAYER 1: Plasma sine waves (background depth effect)
+        // ========================================================
+        const waves = [];
+        function buildWaves() {
+            waves.length = 0;
+            const count = 7;
             for (let i = 0; i < count; i++) {
-                particles.push({
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    vx: (Math.random() - 0.5) * 0.6,
-                    vy: (Math.random() - 0.5) * 0.6,
-                    r: Math.random() * 2 + 1,
-                    opacity: Math.random() * 0.5 + 0.3
+                waves.push({
+                    amp:    H * (0.06 + Math.random() * 0.12),
+                    freq:   0.002 + Math.random() * 0.004,
+                    speed:  0.003 + Math.random() * 0.005,
+                    yBase:  H * (0.15 + (i / count) * 0.72),
+                    phase:  Math.random() * Math.PI * 2,
+                    alpha:  0.08 + Math.random() * 0.10
                 });
             }
         }
 
-        function draw() {
-            ctx.clearRect(0, 0, W, H);
+        function drawWaves(t) {
+            for (const w of waves) {
+                ctx.beginPath();
+                ctx.moveTo(0, H);
+                for (let x = 0; x <= W; x += 2) {
+                    const y = w.yBase + Math.sin(x * w.freq + t * w.speed + w.phase) * w.amp
+                            + Math.sin(x * w.freq * 2.3 - t * w.speed * 0.8) * w.amp * 0.5;
+                    ctx.lineTo(x, y);
+                }
+                ctx.lineTo(W, H);
+                ctx.closePath();
+                const grad = ctx.createLinearGradient(0, 0, W, 0);
+                grad.addColorStop(0,   ac(0));
+                grad.addColorStop(0.3, ac(w.alpha * 0.6));
+                grad.addColorStop(0.5, ac(w.alpha));
+                grad.addColorStop(0.7, ac(w.alpha * 0.6));
+                grad.addColorStop(1,   ac(0));
+                ctx.fillStyle = grad;
+                ctx.fill();
+                // also draw a stroke for the wave edge
+                ctx.beginPath();
+                ctx.moveTo(0, w.yBase + Math.sin(w.phase) * w.amp);
+                for (let x = 0; x <= W; x += 2) {
+                    const y = w.yBase + Math.sin(x * w.freq + t * w.speed + w.phase) * w.amp
+                            + Math.sin(x * w.freq * 2.3 - t * w.speed * 0.8) * w.amp * 0.5;
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = ac(w.alpha * 1.5);
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+            }
+        }
 
-            // Lines
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 140) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(108, 99, 255, ${0.15 * (1 - dist / 140)})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
+        // ========================================================
+        // LAYER 2: Neural network with animated signal pulses
+        // ========================================================
+        let nodes = [], links = [], pulses = [];
+
+        function buildNetwork() {
+            nodes = []; links = []; pulses = [];
+            const count = Math.min(Math.floor((W * H) / 10000), 120);
+            for (let i = 0; i < count; i++) {
+                nodes.push({
+                    x:          Math.random() * W,
+                    y:          Math.random() * H,
+                    vx:         (Math.random() - 0.5) * 0.4,
+                    vy:         (Math.random() - 0.5) * 0.4,
+                    r:          Math.random() * 3 + 1.5,
+                    isHub:      Math.random() > 0.80,
+                    pulse:      Math.random() * Math.PI * 2,
+                    pulseSpeed: 0.025 + Math.random() * 0.035
+                });
+            }
+            buildLinks();
+        }
+
+        function buildLinks() {
+            links = [];
+            const maxDist = Math.min(W, H) * 0.28;
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    if (Math.hypot(dx, dy) < maxDist) links.push([i, j]);
                 }
             }
+        }
 
-            // Dots
-            for (const p of particles) {
-                if (mouse.x !== null) {
-                    const dx = p.x - mouse.x;
-                    const dy = p.y - mouse.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < mouse.radius) {
-                        const force = (mouse.radius - dist) / mouse.radius;
-                        p.x += dx / dist * force * 2;
-                        p.y += dy / dist * force * 2;
-                    }
+        function spawnPulse() {
+            if (links.length === 0) return;
+            const lnk = links[Math.floor(Math.random() * links.length)];
+            pulses.push({ link: lnk, t: 0, speed: 0.006 + Math.random() * 0.01 });
+        }
+
+        function updateNetwork() {
+            const maxDist = Math.min(W, H) * 0.22;
+            for (const n of nodes) {
+                // Mouse repulsion
+                const dx = n.x - mouse.x, dy = n.y - mouse.y;
+                const d = Math.hypot(dx, dy);
+                if (d < 120) {
+                    const f = (120 - d) / 120 * 1.5;
+                    n.vx += (dx / d) * f * 0.05;
+                    n.vy += (dy / d) * f * 0.05;
                 }
+                // Friction
+                n.vx *= 0.99; n.vy *= 0.99;
+                // Speed cap
+                const spd = Math.hypot(n.vx, n.vy);
+                if (spd > 0.8) { n.vx = n.vx / spd * 0.8; n.vy = n.vy / spd * 0.8; }
 
-                p.x += p.vx;
-                p.y += p.vy;
+                n.x += n.vx; n.y += n.vy;
+                if (n.x < 0) { n.x = 0; n.vx *= -1; }
+                if (n.x > W) { n.x = W; n.vx *= -1; }
+                if (n.y < 0) { n.y = 0; n.vy *= -1; }
+                if (n.y > H) { n.y = H; n.vy *= -1; }
+                n.pulse += n.pulseSpeed;
+            }
 
-                if (p.x < 0) p.x = W;
-                if (p.x > W) p.x = 0;
-                if (p.y < 0) p.y = H;
-                if (p.y > H) p.y = 0;
+            // Rebuild links periodically (every ~3s)
+            if (Math.random() < 0.003) buildLinks();
 
+            // Spawn pulses more frequently
+            if (Math.random() < 0.12) spawnPulse();
+            pulses = pulses.filter(p => (p.t += p.speed) < 1);
+        }
+
+        function drawNetwork() {
+            const maxDist = Math.min(W, H) * 0.28;
+
+            // Links — brighter and wider
+            for (const [i, j] of links) {
+                const a = nodes[i], b = nodes[j];
+                const dx = a.x - b.x, dy = a.y - b.y;
+                const dist = Math.hypot(dx, dy);
+                const alpha = 0.38 * (1 - dist / maxDist);
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(108, 99, 255, ${p.opacity})`;
+                ctx.strokeStyle = ac(alpha);
+                ctx.lineWidth = 0.9;
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.stroke();
+            }
+
+            // Signal pulses — much bigger and brighter
+            for (const p of pulses) {
+                const [i, j] = p.link;
+                const a = nodes[i], b = nodes[j];
+                const px = a.x + (b.x - a.x) * p.t;
+                const py = a.y + (b.y - a.y) * p.t;
+                // outer glow
+                const grd = ctx.createRadialGradient(px, py, 0, px, py, 18);
+                grd.addColorStop(0,   ac(1.0));
+                grd.addColorStop(0.3, ac(0.6));
+                grd.addColorStop(1,   ac(0));
+                ctx.beginPath();
+                ctx.arc(px, py, 18, 0, Math.PI * 2);
+                ctx.fillStyle = grd;
+                ctx.fill();
+                // bright core
+                ctx.beginPath();
+                ctx.arc(px, py, 3, 0, Math.PI * 2);
+                ctx.fillStyle = ac(1.0);
                 ctx.fill();
             }
+
+            // Nodes — brighter
+            for (const n of nodes) {
+                const s = Math.sin(n.pulse) * 0.5 + 0.5;
+                if (n.isHub) {
+                    // Hub: large glowing halo
+                    const hGrd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 9 + s * 6);
+                    hGrd.addColorStop(0,   ac(0.7 + s * 0.3));
+                    hGrd.addColorStop(0.35, ac(0.35));
+                    hGrd.addColorStop(1,   ac(0));
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r * 9 + s * 6, 0, Math.PI * 2);
+                    ctx.fillStyle = hGrd;
+                    ctx.fill();
+                    // solid bright core
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r + 1.5, 0, Math.PI * 2);
+                    ctx.fillStyle = ac(1.0);
+                    ctx.fill();
+                } else {
+                    // normal node — visible glow + core
+                    const nGrd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 3);
+                    nGrd.addColorStop(0, ac(0.6 + s * 0.2));
+                    nGrd.addColorStop(1, ac(0));
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = nGrd;
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                    ctx.fillStyle = ac(0.7 + s * 0.3);
+                    ctx.fill();
+                }
+            }
+        }
+
+        // ========================================================
+        // LAYER 3: Matrix binary rain (subtle, right-side bias)
+        // ========================================================
+        const FONT_SIZE = 13;
+        let cols = [], drops = [], matrixChars;
+
+        function buildMatrix() {
+            matrixChars = '01アイウエオカキクケコサシスセソタチツテト∑∈∇∂∞≈≡'.split('');
+            cols = Math.ceil(W / FONT_SIZE);
+            drops = Array.from({ length: cols }, () => Math.random() * -50);
+        }
+
+        function drawMatrix() {
+            ctx.font = `${FONT_SIZE}px 'Courier New', monospace`;
+            ctx.textAlign = 'left';
+            for (let i = 0; i < cols; i++) {
+                const x = i * FONT_SIZE;
+                const bias = x / W;
+                // full screen coverage: stronger on right, lighter on left
+                const maxAlpha = bias > 0.60 ? 0.55 : (bias > 0.30 ? 0.35 : 0.20);
+                const ch = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                const y = drops[i] * FONT_SIZE;
+                // trail character
+                ctx.fillStyle = ac(maxAlpha * (0.4 + Math.random() * 0.5));
+                ctx.fillText(ch, x, y);
+                // bright leading "head" character
+                if (y > 0 && y < H) {
+                    ctx.fillStyle = ac(Math.min(maxAlpha * 3, 1.0));
+                    ctx.fillText(ch, x, y);
+                }
+                if (y > H + Math.random() * 500) drops[i] = 0;
+                drops[i] += 0.5;
+            }
+        }
+
+        // ========================================================
+        // Main init and loop
+        // ========================================================
+        function init() {
+            buildWaves();
+            buildNetwork();
+            buildMatrix();
+        }
+
+        function draw(timestamp) {
+            const t = timestamp || 0;
+            ctx.clearRect(0, 0, W, H);
+
+            // L1: Plasma waves
+            drawWaves(t);
+
+            // L2: Neural network
+            updateNetwork();
+            drawNetwork();
+
+            // L3: Matrix rain (only in dark mode)
+            if (document.body.classList.contains('dark-mode')) drawMatrix();
 
             particleAnimId = requestAnimationFrame(draw);
         }
 
-        canvas.addEventListener('mousemove', (e) => {
+        canvas.addEventListener('mousemove', e => {
             const rect = canvas.getBoundingClientRect();
             mouse.x = e.clientX - rect.left;
             mouse.y = e.clientY - rect.top;
         });
-
-        canvas.addEventListener('mouseleave', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
+        canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
 
         window.addEventListener('resize', () => {
             resize();
-            createParticles();
         });
 
         resize();
-        createParticles();
-        draw();
+        particleAnimId = requestAnimationFrame(draw);
 
         reinitParticles = () => {
             cancelAnimationFrame(particleAnimId);
             resize();
-            createParticles();
-            draw();
         };
     }
 
@@ -209,6 +416,73 @@
         }
 
         setTimeout(tick, 800);
+    }
+
+    // ============================================================
+    //  MULTILINGUAL GREETING TYPEWRITER
+    // ============================================================
+    function initGreetingTypewriter() {
+        const el = $('#greeting-text');
+        if (!el) return;
+
+        const greetings = [
+            'Hello',
+            'Namaste',
+            'Hola',
+            'Bonjour',
+            'Salaam',
+            'வணக்கம்',
+            '你好'
+        ];
+
+        if (prefersReducedMotion) {
+            el.textContent = greetings[0];
+            const cursor = $('.greeting-cursor');
+            if (cursor) cursor.style.display = 'none';
+            return;
+        }
+
+        let greetIdx = 0;
+        let charIdx = greetings[0].length; // start fully typed
+        let isDeleting = false;
+        let speed = 100;
+        let pauseAfterType = 2500;
+
+        function tick() {
+            const current = greetings[greetIdx];
+
+            if (isDeleting) {
+                // Use Array.from for multi-byte character support (e.g. Chinese, Tamil)
+                const chars = Array.from(current);
+                charIdx--;
+                el.textContent = chars.slice(0, charIdx).join('');
+                speed = 50;
+            } else {
+                const chars = Array.from(current);
+                charIdx++;
+                el.textContent = chars.slice(0, charIdx).join('');
+                speed = 100;
+            }
+
+            const chars = Array.from(current);
+            if (!isDeleting && charIdx >= chars.length) {
+                speed = pauseAfterType;
+                isDeleting = true;
+            } else if (isDeleting && charIdx <= 0) {
+                isDeleting = false;
+                greetIdx = (greetIdx + 1) % greetings.length;
+                charIdx = 0;
+                speed = 300;
+            }
+
+            setTimeout(tick, speed);
+        }
+
+        // Start with initial pause before first delete
+        setTimeout(() => {
+            isDeleting = true;
+            tick();
+        }, pauseAfterType);
     }
 
     // ============================================================
@@ -494,6 +768,7 @@
         initThemeToggle();
         initParticles();
         initTypewriter();
+        initGreetingTypewriter();
         initNav();
         initActiveSection();
         initScrollReveal();
